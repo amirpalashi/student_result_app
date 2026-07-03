@@ -26,12 +26,58 @@ class CustomDropdown<T> extends StatelessWidget {
       builder: (field) {
         return DropdownMenu<T>(
           initialSelection: field.value,
+
           dropdownMenuEntries: entries,
+
           width: double.infinity,
+
+          menuHeight: 320,
+
+          expandedInsets: EdgeInsets.zero,
+
           leadingIcon: prefixIcon != null ? Icon(prefixIcon) : null,
+
           label: Text(label),
 
+          hintText: "Select $label",
+
           errorText: field.errorText,
+
+          inputDecorationTheme: InputDecorationTheme(
+            filled: true,
+            fillColor: Colors.grey.shade50,
+
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 18,
+              vertical: 18,
+            ),
+
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(18),
+            ),
+
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide(
+                color: Colors.grey.shade300,
+              ),
+            ),
+
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(18),
+              borderSide: const BorderSide(
+                color: Colors.blue,
+                width: 2,
+              ),
+            ),
+
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(18),
+              borderSide: const BorderSide(
+                color: Colors.red,
+              ),
+            ),
+          ),
 
           onSelected: (value) {
             field.didChange(value);

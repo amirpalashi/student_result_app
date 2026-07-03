@@ -5,6 +5,7 @@ import '../../widgets/home/result_search_form.dart';
 import '../../models/student_model.dart';
 import '../../services/student_service.dart';
 import '../result/result_screen.dart';
+import '../admin/admin_dashboard_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -131,7 +132,29 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const AdminDashboardScreen(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.admin_panel_settings),
+                    label: const Text("Admin Panel"),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 50),
+                    ),
+                  ),
+                ),
+              ),
 
+              const SizedBox(height: 20),
               const Padding(
                 padding: EdgeInsets.only(bottom: 20),
                 child: Text(

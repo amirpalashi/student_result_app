@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../custom_dropdown.dart';
+import '../app_selector.dart';
 import '../custom_textfield.dart';
 import '../primary_button.dart';
 import '../../core/constants/app_lists.dart';
@@ -101,17 +101,13 @@ class ResultSearchForm extends StatelessWidget {
 
           const SizedBox(height: 30),
 
-          CustomDropdown<String>(
+          AppSelector<String>(
             label: "Academic Session",
+            icon: Icons.calendar_today,
             value: session,
-            prefixIcon: Icons.calendar_today,
-            entries: AppLists.academicSessions
-                .map(
-                  (session) =>
-                      DropdownMenuEntry<String>(value: session, label: session),
-                )
-                .toList(),
-            onSelected: onSessionChanged,
+            items: AppLists.academicSessions,
+            itemLabel: (item) => item,
+            onChanged: onSessionChanged,
             validator: (value) {
               if (value == null) {
                 return "Please select academic session";
@@ -122,16 +118,13 @@ class ResultSearchForm extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          CustomDropdown<String>(
+          AppSelector<String>(
             label: "Class",
+            icon: Icons.school,
             value: studentClass,
-            prefixIcon: Icons.school,
-            entries: AppLists.classes
-                .map(
-                  (item) => DropdownMenuEntry<String>(value: item, label: item),
-                )
-                .toList(),
-            onSelected: onClassChanged,
+            items: AppLists.classes,
+            itemLabel: (item) => item,
+            onChanged: onClassChanged,
             validator: (value) {
               if (value == null) {
                 return "Please select class";
@@ -142,16 +135,13 @@ class ResultSearchForm extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          CustomDropdown<String>(
+          AppSelector<String>(
             label: "Exam",
+            icon: Icons.assignment,
             value: exam,
-            prefixIcon: Icons.assignment,
-            entries: AppLists.exams
-                .map(
-                  (item) => DropdownMenuEntry<String>(value: item, label: item),
-                )
-                .toList(),
-            onSelected: onExamChanged,
+            items: AppLists.exams,
+            itemLabel: (item) => item,
+            onChanged: onExamChanged,
             validator: (value) {
               if (value == null) {
                 return "Please select exam";
@@ -182,7 +172,6 @@ class ResultSearchForm extends StatelessWidget {
 
           const SizedBox(height: 30),
 
-  
           PrimaryButton(
             text: isLoading ? "Searching..." : "Search Result",
             icon: isLoading ? Icons.hourglass_top : Icons.search,

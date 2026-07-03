@@ -9,7 +9,7 @@ class StudentModel {
   final String exam;
   final String roll;
   final String groupName;
-  final String mobile;
+  final String? mobile;
   final double gpa;
 
   const StudentModel({
@@ -23,7 +23,7 @@ class StudentModel {
     required this.exam,
     required this.roll,
     required this.groupName,
-    required this.mobile,
+    this.mobile,
     required this.gpa,
   });
 
@@ -56,7 +56,7 @@ class StudentModel {
       exam: map['exam'] as String,
       roll: map['roll'] as String,
       groupName: map['group_name'] as String,
-      mobile: map['mobile'] as String,
+      mobile: map['mobile'] as String?,
       gpa: (map['gpa'] as num).toDouble(),
     );
   }

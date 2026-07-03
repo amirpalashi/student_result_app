@@ -1,147 +1,154 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/home_header.dart';
-import '../../widgets/home/result_search_form.dart';
 import '../../models/student_model.dart';
-import '../../services/student_service.dart';
-import '../result/result_screen.dart';
+import '../../repositories/student_repository.dart';
+import '../../widgets/admin/student_card.dart';
+import 'add_student_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class StudentListScreen extends StatefulWidget {
+  const StudentListScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<StudentListScreen> createState() => _StudentListScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  final _formKey = GlobalKey<FormState>();
+class _StudentListScreenState extends State<StudentListScreen> {
+  List<StudentModel> students = [];
 
-  String? session;
-  String? studentClass;
-  String? exam;
-
-  final TextEditingController studentIdController = TextEditingController();
-  bool _isLoading = false;
-
-  @override
-  void dispose() {
-    studentIdController.dispose();
-    super.dispose();
-  }
-
-  Future<void> _searchStudent() async {
-    if (!_formKey.currentState!.validate()) {
-      return;
-    }
-
-    if (session == null || studentClass == null || exam == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please select Session, Class and Exam.")),
-      );
-      return;
-    }
-
-    setState(() {
-      _isLoading = true;
-    });
-
-    final StudentModel? student = await StudentService.instance.searchStudent(
-      studentId: studentIdController.text.trim(),
-      session: session!,
-      className: studentClass!,
-      exam: exam!,
-    );
+  bool isLoading = true;
+  Future<void> loadStudents() async {
+    final data = await StudentRepository.instance.getAllStudents();
 
     if (!mounted) return;
 
     setState(() {
-      _isLoading = false;
+      students = data;
+      isLoading = false;
     });
+  }
 
-    if (student == null) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("Student not found.")));
-      return;
-    }
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => ResultScreen(student: student)),
+  Future<void> _deleteStudent(StudentModel student) async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          icon: const Icon(
+            Icons.warning_amber_rounded,
+            color: Colors.red,
+            size: 40,
+          ),
+          title: const Text("Delete Student"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "This action cannot be undone!",
+                style: TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 12),
+              const Text("Are you sure you want to delete this student?"),
+              const SizedBox(height: 16),
+              Text(
+                "Name: ${student.studentName}",
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text("ID: ${student.studentId}"),
+            ],
+          ),
+          actions: [
+            OutlinedButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text("Cancel"),
+            ),
+            FilledButton.icon(
+              style: FilledButton.styleFrom(backgroundColor: Colors.red),
+              onPressed: () => Navigator.pop(context, true),
+              icon: const Icon(Icons.delete),
+              label: const Text("Delete"),
+            ),
+          ],
+        );
+      },
     );
 
-    // Result Screen Navigation
-    // Step 10
+    if (confirm != true) return;
+
+    if (confirm != true) return;
+
+    await StudentRepository.instance.deleteStudent(student.id!);
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Student deleted successfully.")),
+    );
+
+    loadStudents();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadStudents();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const HomeHeader(),
+      appBar: AppBar(title: const Text("Student List"), centerTitle: true),
 
-              Transform.translate(
-                offset: const Offset(0, -40),
-                child: Transform.translate(
-                  offset: const Offset(0, -45),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Center(
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 560),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 250),
-                          curve: Curves.easeInOut,
-                          child: Card(
-                            elevation: 8,
-                            shadowColor: Colors.black26,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(28),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(28),
-                              child: ResultSearchForm(
-                                formKey: _formKey,
-                                session: session,
-                                studentClass: studentClass,
-                                exam: exam,
-                                studentIdController: studentIdController,
-                                isLoading: _isLoading,
-                                onSessionChanged: (value) {
-                                  setState(() => session = value);
-                                },
-                                onClassChanged: (value) {
-                                  setState(() => studentClass = value);
-                                },
-                                onExamChanged: (value) {
-                                  setState(() => exam = value);
-                                },
-                                onSearch: _searchStudent,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+      body: ListView.builder(
+        itemCount: students.length,
+        itemBuilder: (context, index) {
+          final student = students[index];
+
+          return StudentCard(
+            student: student,
+            onEdit: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => AddStudentScreen(student: student),
                 ),
-              ),
+              );
 
-              const SizedBox(height: 10),
+              loadStudents();
+            },
+            onDelete: () {
+              _deleteStudent(student);
+            },
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const AddStudentScreen()),
+          );
+          Future<void> loadStudents() async {
+            final data = await StudentRepository.instance.getAllStudents();
 
-              const Padding(
-                padding: EdgeInsets.only(bottom: 20),
-                child: Text(
-                  "© 2026 Student Result App",
-                  style: TextStyle(color: Colors.grey, fontSize: 13),
-                ),
-              ),
-            ],
-          ),
-        ),
+            debugPrint("===== TOTAL STUDENTS =====");
+            debugPrint(data.length.toString());
+
+            if (!mounted) return;
+
+            setState(() {
+              students = data;
+              isLoading = false;
+            });
+          }
+
+          // Add Student Screen থেকে ফিরে এলে List Refresh হবে
+          loadStudents();
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

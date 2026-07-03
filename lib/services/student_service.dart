@@ -66,7 +66,10 @@ AND exam = ?
   Future<List<StudentModel>> getAllStudents() async {
     final Database db = await DatabaseHelper.instance.database;
 
-    final result = await db.query(DatabaseTables.studentTable);
+    final result = await db.query(
+      DatabaseTables.studentTable,
+      orderBy: 'student_name ASC',
+    );
 
     return result.map(StudentModel.fromMap).toList();
   }
@@ -77,18 +80,18 @@ AND exam = ?
     return db.update(
       DatabaseTables.studentTable,
       student.toMap(),
-      where: 'student_id = ?',
-      whereArgs: [student.studentId],
+      where: 'id = ?',
+      whereArgs: [student.id],
     );
   }
 
-  Future<int> deleteStudent(String studentId) async {
+  Future<int> deleteStudent(int id) async {
     final Database db = await DatabaseHelper.instance.database;
 
     return db.delete(
       DatabaseTables.studentTable,
-      where: 'student_id = ?',
-      whereArgs: [studentId],
+      where: 'id = ?',
+      whereArgs: [id],
     );
   }
 }

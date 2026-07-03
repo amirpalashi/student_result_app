@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+
 import 'add_student_screen.dart';
+import 'package:flutter/material.dart';
+import 'student_list_screen.dart';
 
 class AdminDashboardScreen extends StatelessWidget {
   const AdminDashboardScreen({super.key});
@@ -33,7 +35,10 @@ class AdminDashboardScreen extends StatelessWidget {
               title: "Student List",
               color: Colors.green,
               onTap: () {
-                // Step 13.2
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const StudentListScreen()),
+                );
               },
             ),
             _buildCard(

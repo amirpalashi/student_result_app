@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
@@ -6,6 +7,8 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final IconData? prefixIcon;
   final String? Function(String?)? validator;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputAction textInputAction;
 
   const CustomTextField({
     super.key,
@@ -14,6 +17,8 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.prefixIcon,
     this.validator,
+    this.inputFormatters,
+    this.textInputAction = TextInputAction.next,
   });
 
   @override
@@ -21,8 +26,12 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
-      textInputAction: TextInputAction.search,
+      textInputAction: textInputAction,
       validator: validator,
+      inputFormatters: inputFormatters,
+      autofillHints: keyboardType == TextInputType.phone
+          ? const [AutofillHints.telephoneNumber]
+          : null,
       decoration: InputDecoration(
         labelText: label,
         hintText: "Enter $label",
