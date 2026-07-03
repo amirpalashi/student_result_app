@@ -4,6 +4,7 @@ class DatabaseTables {
   // Table Names
   static const String studentTable = 'students';
   static const String subjectResultTable = 'subject_results';
+  static const String subjectTable = 'subjects';
 
   // ==========================
   // Students Table
@@ -33,9 +34,26 @@ CREATE TABLE subject_results(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   student_id TEXT NOT NULL,
   subject_name TEXT NOT NULL,
+  full_marks INTEGER NOT NULL DEFAULT 100,
+  pass_marks INTEGER NOT NULL DEFAULT 33,
   marks INTEGER NOT NULL,
   grade TEXT NOT NULL,
   grade_point REAL NOT NULL
+)
+''';
+// ==========================
+  // Subject Subject Table
+  // ==========================
+
+
+static const String createSubjectTable = '''
+CREATE TABLE subjects(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  class_name TEXT NOT NULL,
+  group_name TEXT NOT NULL,
+  subject_name TEXT NOT NULL,
+  full_marks INTEGER NOT NULL DEFAULT 100,
+  pass_marks INTEGER NOT NULL DEFAULT 33
 )
 ''';
 }

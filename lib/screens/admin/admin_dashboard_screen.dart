@@ -1,7 +1,7 @@
-
 import 'add_student_screen.dart';
 import 'package:flutter/material.dart';
 import 'student_list_screen.dart';
+import '../subject/subject_management_screen.dart';
 
 class AdminDashboardScreen extends StatelessWidget {
   const AdminDashboardScreen({super.key});
@@ -44,10 +44,15 @@ class AdminDashboardScreen extends StatelessWidget {
             _buildCard(
               context,
               icon: Icons.menu_book,
-              title: "Subject Marks",
+              title: "Subject Management",
               color: Colors.orange,
               onTap: () {
-                // Step 13.5
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const SubjectManagementScreen(),
+                  ),
+                );
               },
             ),
             _buildCard(

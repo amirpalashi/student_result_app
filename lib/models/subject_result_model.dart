@@ -2,6 +2,8 @@ class SubjectResultModel {
   final int? id;
   final String studentId;
   final String subjectName;
+  final int fullMarks;
+  final int passMarks;
   final int marks;
   final String grade;
   final double gradePoint;
@@ -10,6 +12,8 @@ class SubjectResultModel {
     this.id,
     required this.studentId,
     required this.subjectName,
+    required this.fullMarks,
+    required this.passMarks,
     required this.marks,
     required this.grade,
     required this.gradePoint,
@@ -20,6 +24,8 @@ class SubjectResultModel {
       'id': id,
       'student_id': studentId,
       'subject_name': subjectName,
+      'full_marks': fullMarks,
+      'pass_marks': passMarks,
       'marks': marks,
       'grade': grade,
       'grade_point': gradePoint,
@@ -31,6 +37,8 @@ class SubjectResultModel {
       id: map['id'] as int?,
       studentId: map['student_id'] as String,
       subjectName: map['subject_name'] as String,
+      fullMarks: map['full_marks'] as int,
+      passMarks: map['pass_marks'] as int,
       marks: map['marks'] as int,
       grade: map['grade'] as String,
       gradePoint: (map['grade_point'] as num).toDouble(),
@@ -41,6 +49,8 @@ class SubjectResultModel {
     int? id,
     String? studentId,
     String? subjectName,
+    int? fullMarks,
+    int? passMarks,
     int? marks,
     String? grade,
     double? gradePoint,
@@ -49,6 +59,8 @@ class SubjectResultModel {
       id: id ?? this.id,
       studentId: studentId ?? this.studentId,
       subjectName: subjectName ?? this.subjectName,
+      fullMarks: fullMarks ?? this.fullMarks,
+      passMarks: passMarks ?? this.passMarks,
       marks: marks ?? this.marks,
       grade: grade ?? this.grade,
       gradePoint: gradePoint ?? this.gradePoint,

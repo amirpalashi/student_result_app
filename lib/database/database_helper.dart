@@ -33,7 +33,7 @@ class DatabaseHelper {
 
     return openDatabase(
       path,
-      version: 2,
+      version: 4,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
     );
@@ -41,13 +41,28 @@ class DatabaseHelper {
 
   Future<void> _onCreate(Database db, int version) async {
     await db.execute(DatabaseTables.createStudentTable);
-
     await db.execute(DatabaseTables.createSubjectResultTable);
+    await db.execute(DatabaseTables.createSubjectTable);
   }
 
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 2) {
       await db.execute(DatabaseTables.createSubjectResultTable);
+    }
+
+    if (oldVersion < 3) {
+      await db.execute('''
+      ALTER TABLE subject_results
+      ADD COLUMN full_marks INTEGER NOT NULL DEFAULT 100
+      ''');
+
+      await db.execute('''
+      ALTER TABLE subject_results
+      ADD COLUMN pass_marks INTEGER NOT NULL DEFAULT 33
+      ''');
+    }
+    if (oldVersion < 4) {
+      await db.execute(DatabaseTables.createSubjectTable);
     }
   }
 
