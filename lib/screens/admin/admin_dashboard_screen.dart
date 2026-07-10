@@ -2,6 +2,10 @@ import 'add_student_screen.dart';
 import 'package:flutter/material.dart';
 import 'student_list_screen.dart';
 import '../subject/subject_management_screen.dart';
+import '../result/result_entry_screen.dart';
+import 'import_export/import_export_screen.dart';
+import '../result/student_marksheet_screen.dart';
+import '../settings/school_settings_screen.dart';
 
 class AdminDashboardScreen extends StatelessWidget {
   const AdminDashboardScreen({super.key});
@@ -57,10 +61,64 @@ class AdminDashboardScreen extends StatelessWidget {
             ),
             _buildCard(
               context,
-              icon: Icons.analytics,
-              title: "Reports",
+              icon: Icons.assignment,
+              title: "Result Entry",
               color: Colors.purple,
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ResultEntryScreen()),
+                );
+              },
+            ),
+            _buildCard(
+              context,
+              icon: Icons.import_export,
+              title: "Import & Export",
+              color: Colors.teal,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ImportExportScreen()),
+                );
+              },
+            ),
+            _buildCard(
+              context,
+              icon: Icons.description,
+              title: "Student Marksheet",
+              color: Colors.indigo,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const StudentMarksheetScreen(),
+                  ),
+                );
+              },
+            ),
+            _buildCard(
+              context,
+              icon: Icons.school,
+              title: "School Settings",
+              color: Colors.red,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const SchoolSettingsScreen(),
+                  ),
+                );
+              },
+            ),
+            _buildCard(
+              context,
+              icon: Icons.info,
+              title: "About",
+              color: Colors.grey,
+              onTap: () {
+                // পরে করব
+              },
             ),
           ],
         ),

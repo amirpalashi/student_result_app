@@ -5,54 +5,40 @@ class ResultActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: FilledButton.icon(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("PDF Export coming soon"),
-                ),
-              );
-            },
-            icon: const Icon(Icons.picture_as_pdf),
-            label: const Text("PDF"),
-          ),
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ElevatedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.print),
+              label: const Text('Print Result'),
+            ),
+
+            const SizedBox(height: 12),
+
+            ElevatedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.picture_as_pdf),
+              label: const Text('Export PDF'),
+            ),
+
+            const SizedBox(height: 12),
+
+            ElevatedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.share),
+              label: const Text('Share Result'),
+            ),
+          ],
         ),
-
-        const SizedBox(width: 12),
-
-        Expanded(
-          child: FilledButton.icon(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("Print feature coming soon"),
-                ),
-              );
-            },
-            icon: const Icon(Icons.print),
-            label: const Text("Print"),
-          ),
-        ),
-
-        const SizedBox(width: 12),
-
-        Expanded(
-          child: FilledButton.icon(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("Share feature coming soon"),
-                ),
-              );
-            },
-            icon: const Icon(Icons.share),
-            label: const Text("Share"),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

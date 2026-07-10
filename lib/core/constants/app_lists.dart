@@ -37,7 +37,7 @@ class AppLists {
   ];
 
   static const List<String> groups = [
-    'None',
+    'General',
     'Science',
     'Business Studies',
     'Humanities',

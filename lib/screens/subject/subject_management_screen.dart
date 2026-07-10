@@ -139,7 +139,7 @@ class _SubjectManagementScreenState extends State<SubjectManagementScreen> {
                   _selectedClass = value;
 
                   if (!EducationHelper.hasGroup(value)) {
-                    _selectedGroup = 'None';
+                    _selectedGroup = 'General';
                   } else {
                     _selectedGroup = null;
                   }

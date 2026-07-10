@@ -87,7 +87,13 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
       className: studentClass!,
       exam: exam!,
       roll: rollController.text.trim(),
-      groupName: group ?? '',
+      groupName:
+          (studentClass == "Class 9" ||
+              studentClass == "Class 10" ||
+              studentClass == "Class XI" ||
+              studentClass == "Class XII")
+          ? (group ?? '')
+          : 'General',
       mobile: mobileController.text.trim(),
       gpa: 0.0,
     );

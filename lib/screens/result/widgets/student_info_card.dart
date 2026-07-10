@@ -5,15 +5,18 @@ import '../../../models/student_model.dart';
 class StudentInfoCard extends StatelessWidget {
   final StudentModel student;
 
-  const StudentInfoCard({super.key, required this.student});
+  const StudentInfoCard({
+    super.key,
+    required this.student,
+  });
 
-  Widget _buildInfoRow(String title, String value) {
+  Widget _buildRow(String title, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         children: [
-          Expanded(
-            flex: 3,
+          SizedBox(
+            width: 110,
             child: Text(
               title,
               style: const TextStyle(
@@ -22,12 +25,12 @@ class StudentInfoCard extends StatelessWidget {
               ),
             ),
           ),
-          const Text(": "),
           Expanded(
-            flex: 5,
             child: Text(
               value,
-              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],
@@ -38,35 +41,37 @@ class StudentInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(18),
         child: Column(
           children: [
-            const CircleAvatar(radius: 40, child: Icon(Icons.person, size: 45)),
+            const CircleAvatar(
+              radius: 35,
+              child: Icon(Icons.person, size: 40),
+            ),
 
             const SizedBox(height: 16),
 
             Text(
               student.studentName,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
 
             const SizedBox(height: 20),
 
-            const Divider(),
-
-            _buildInfoRow("Student ID", student.studentId),
-            _buildInfoRow("Roll", student.roll),
-            _buildInfoRow("Class", student.className),
-            _buildInfoRow("Group", student.groupName),
-            _buildInfoRow("Session", student.session),
-            _buildInfoRow("Exam", student.exam),
-            _buildInfoRow("Father", student.fatherName),
-            _buildInfoRow("Mother", student.motherName),
-            if ((student.mobile ?? '').isNotEmpty)
-              _buildInfoRow("Mobile", student.mobile!),
+            _buildRow('Student ID', student.studentId),
+            _buildRow('Roll', student.roll),
+            _buildRow('Class', student.className),
+            _buildRow('Group', student.groupName),
+            _buildRow('Session', student.session),
+            _buildRow('Exam', student.exam),
           ],
         ),
       ),

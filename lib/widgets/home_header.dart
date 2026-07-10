@@ -1,10 +1,35 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../core/constants/app_strings.dart';
 import '../core/theme/app_text_styles.dart';
+import '../models/school_settings_model.dart';
+import '../services/school_settings_service.dart';
 
-class HomeHeader extends StatelessWidget {
+class HomeHeader extends StatefulWidget {
   const HomeHeader({super.key});
+
+  @override
+  State<HomeHeader> createState() => _HomeHeaderState();
+}
+
+class _HomeHeaderState extends State<HomeHeader> {
+  SchoolSettingsModel? settings;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSettings();
+  }
+
+  Future<void> _loadSettings() async {
+    settings = await SchoolSettingsService.instance.getSettings();
+
+    if (mounted) {
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +63,16 @@ class HomeHeader extends StatelessWidget {
               child: SizedBox(
                 width: 82,
                 height: 82,
-                child: Image.asset(
-                  "assets/images/college_logo.png",
-                  fit: BoxFit.contain,
-                ),
+                child: settings?.logoPath != null &&
+                        settings!.logoPath!.isNotEmpty
+                    ? Image.file(
+                        File(settings!.logoPath!),
+                        fit: BoxFit.contain,
+                      )
+                    : Image.asset(
+                        "assets/images/college_logo.png",
+                        fit: BoxFit.contain,
+                      ),
               ),
             ),
           ),
@@ -49,7 +80,9 @@ class HomeHeader extends StatelessWidget {
           const SizedBox(height: 20),
 
           Text(
-            AppStrings.collegeName,
+            settings?.organizationName.isNotEmpty == true
+                ? settings!.organizationName
+                : AppStrings.collegeName,
             textAlign: TextAlign.center,
             style: AppTextStyles.title.copyWith(
               color: Colors.white,
@@ -68,6 +101,18 @@ class HomeHeader extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
           ),
+
+          if (settings != null && settings!.address.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Text(
+              settings!.address,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 13,
+              ),
+            ),
+          ],
 
           const SizedBox(height: 18),
 

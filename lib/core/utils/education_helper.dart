@@ -1,4 +1,3 @@
-
 class EducationHelper {
   EducationHelper._();
 
@@ -22,7 +21,7 @@ class EducationHelper {
 
   static List<String> availableGroups(String? className) {
     if (!hasGroup(className)) {
-      return ['None'];
+      return const ['General'];
     }
 
     return const [

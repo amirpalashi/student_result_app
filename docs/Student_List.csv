@@ -1,0 +1,64 @@
+student_id,student_name,father_name,mother_name,roll,class_name,group_name,session,exam,mobile
+20260001,Student 1,Father 1,Mother 1,1,Class 1,General,2026-27,Annual,01720260001
+20260002,Student 2,Father 2,Mother 2,2,Class 1,General,2026-27,Annual,01720260002
+20260003,Student 3,Father 3,Mother 3,3,Class 1,General,2026-27,Annual,01720260003
+20260004,Student 4,Father 4,Mother 4,1,Class 2,General,2026-27,Annual,01720260004
+20260005,Student 5,Father 5,Mother 5,2,Class 2,General,2026-27,Annual,01720260005
+20260006,Student 6,Father 6,Mother 6,3,Class 2,General,2026-27,Annual,01720260006
+20260007,Student 7,Father 7,Mother 7,1,Class 3,General,2026-27,Annual,01720260007
+20260008,Student 8,Father 8,Mother 8,2,Class 3,General,2026-27,Annual,01720260008
+20260009,Student 9,Father 9,Mother 9,3,Class 3,General,2026-27,Annual,01720260009
+20260010,Student 10,Father 10,Mother 10,1,Class 4,General,2026-27,Annual,01720260010
+20260011,Student 11,Father 11,Mother 11,2,Class 4,General,2026-27,Annual,01720260011
+20260012,Student 12,Father 12,Mother 12,3,Class 4,General,2026-27,Annual,01720260012
+20260013,Student 13,Father 13,Mother 13,1,Class 5,General,2026-27,Annual,01720260013
+20260014,Student 14,Father 14,Mother 14,2,Class 5,General,2026-27,Annual,01720260014
+20260015,Student 15,Father 15,Mother 15,3,Class 5,General,2026-27,Annual,01720260015
+20260016,Student 16,Father 16,Mother 16,1,Class 6,General,2026-27,Annual,01720260016
+20260017,Student 17,Father 17,Mother 17,2,Class 6,General,2026-27,Annual,01720260017
+20260018,Student 18,Father 18,Mother 18,3,Class 6,General,2026-27,Annual,01720260018
+20260019,Student 19,Father 19,Mother 19,1,Class 7,General,2026-27,Annual,01720260019
+20260020,Student 20,Father 20,Mother 20,2,Class 7,General,2026-27,Annual,01720260020
+20260021,Student 21,Father 21,Mother 21,3,Class 7,General,2026-27,Annual,01720260021
+20260022,Student 22,Father 22,Mother 22,1,Class 8,General,2026-27,Annual,01720260022
+20260023,Student 23,Father 23,Mother 23,2,Class 8,General,2026-27,Annual,01720260023
+20260024,Student 24,Father 24,Mother 24,3,Class 8,General,2026-27,Annual,01720260024
+20260025,Student 25,Father 25,Mother 25,1,Class 9,Science,2026-27,Annual,01720260025
+20260026,Student 26,Father 26,Mother 26,2,Class 9,Science,2026-27,Annual,01720260026
+20260027,Student 27,Father 27,Mother 27,3,Class 9,Science,2026-27,Annual,01720260027
+20260028,Student 28,Father 28,Mother 28,1,Class 9,Business Studies,2026-27,Annual,01720260028
+20260029,Student 29,Father 29,Mother 29,2,Class 9,Business Studies,2026-27,Annual,01720260029
+20260030,Student 30,Father 30,Mother 30,3,Class 9,Business Studies,2026-27,Annual,01720260030
+20260031,Student 31,Father 31,Mother 31,1,Class 9,Humanities,2026-27,Annual,01720260031
+20260032,Student 32,Father 32,Mother 32,2,Class 9,Humanities,2026-27,Annual,01720260032
+20260033,Student 33,Father 33,Mother 33,3,Class 9,Humanities,2026-27,Annual,01720260033
+20260034,Student 34,Father 34,Mother 34,1,Class 10,Science,2026-27,Annual,01720260034
+20260035,Student 35,Father 35,Mother 35,2,Class 10,Science,2026-27,Annual,01720260035
+20260036,Student 36,Father 36,Mother 36,3,Class 10,Science,2026-27,Annual,01720260036
+20260037,Student 37,Father 37,Mother 37,1,Class 10,Business Studies,2026-27,Annual,01720260037
+20260038,Student 38,Father 38,Mother 38,2,Class 10,Business Studies,2026-27,Annual,01720260038
+20260039,Student 39,Father 39,Mother 39,3,Class 10,Business Studies,2026-27,Annual,01720260039
+20260040,Student 40,Father 40,Mother 40,1,Class 10,Humanities,2026-27,Annual,01720260040
+20260041,Student 41,Father 41,Mother 41,2,Class 10,Humanities,2026-27,Annual,01720260041
+20260042,Student 42,Father 42,Mother 42,3,Class 10,Humanities,2026-27,Annual,01720260042
+20260043,Student 43,Father 43,Mother 43,1,Class XI,Science,2026-27,Annual,01720260043
+20260044,Student 44,Father 44,Mother 44,2,Class XI,Science,2026-27,Annual,01720260044
+20260045,Student 45,Father 45,Mother 45,3,Class XI,Science,2026-27,Annual,01720260045
+20260046,Student 46,Father 46,Mother 46,1,Class XI,Business Studies,2026-27,Annual,01720260046
+20260047,Student 47,Father 47,Mother 47,2,Class XI,Business Studies,2026-27,Annual,01720260047
+20260048,Student 48,Father 48,Mother 48,3,Class XI,Business Studies,2026-27,Annual,01720260048
+20260049,Student 49,Father 49,Mother 49,1,Class XI,Humanities,2026-27,Annual,01720260049
+20260050,Student 50,Father 50,Mother 50,2,Class XI,Humanities,2026-27,Annual,01720260050
+20260051,Student 51,Father 51,Mother 51,3,Class XI,Humanities,2026-27,Annual,01720260051
+20260052,Student 52,Father 52,Mother 52,1,Class XII,Science,2026-27,Annual,01720260052
+20260053,Student 53,Father 53,Mother 53,2,Class XII,Science,2026-27,Annual,01720260053
+20260054,Student 54,Father 54,Mother 54,3,Class XII,Science,2026-27,Annual,01720260054
+20260055,Student 55,Father 55,Mother 55,1,Class XII,Business Studies,2026-27,Annual,01720260055
+20260056,Student 56,Father 56,Mother 56,2,Class XII,Business Studies,2026-27,Annual,01720260056
+20260057,Student 57,Father 57,Mother 57,3,Class XII,Business Studies,2026-27,Annual,01720260057
+20260058,Student 58,Father 58,Mother 58,1,Class XII,Humanities,2026-27,Annual,01720260058
+20260059,Student 59,Father 59,Mother 59,2,Class XII,Humanities,2026-27,Annual,01720260059
+20260060,Student 60,Father 60,Mother 60,3,Class XII,Humanities,2026-27,Annual,01720260060
+20260061,Student 61,Father 61,Mother 61,1,Play,General,2026-27,Annual,01720260061
+20260062,Student 62,Father 62,Mother 62,1,Nursery,General,2026-27,Annual,01720260062
+20260063,Student 63,Father 63,Mother 63,1,KG,General,2026-27,Annual,01720260063

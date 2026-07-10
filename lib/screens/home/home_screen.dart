@@ -4,7 +4,7 @@ import '../../widgets/home_header.dart';
 import '../../widgets/home/result_search_form.dart';
 import '../../models/student_model.dart';
 import '../../services/student_service.dart';
-import '../result/result_screen.dart';
+import '../result/result_view_screen.dart';
 import '../admin/admin_dashboard_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => ResultScreen(student: student)),
+      MaterialPageRoute(builder: (_) => ResultViewScreen(student: student)),
     );
 
     // Result Screen Navigation

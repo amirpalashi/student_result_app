@@ -1,0 +1,188 @@
+class_name,group_name,subject_name,full_marks,pass_marks
+Play,General,Bangla,100,33
+Play,General,English,100,33
+Play,General,Mathematics,100,33
+
+Nursery,General,Bangla,100,33
+Nursery,General,English,100,33
+Nursery,General,Mathematics,100,33
+
+KG,General,Bangla,100,33
+KG,General,English,100,33
+KG,General,Mathematics,100,33
+
+Class 1,General,Bangla,100,33
+Class 1,General,English,100,33
+Class 1,General,Mathematics,100,33
+Class 1,General,Science,100,33
+Class 1,General,Religion,100,33
+
+Class 2,General,Bangla,100,33
+Class 2,General,English,100,33
+Class 2,General,Mathematics,100,33
+Class 2,General,Science,100,33
+Class 2,General,Religion,100,33
+
+Class 3,General,Bangla,100,33
+Class 3,General,English,100,33
+Class 3,General,Mathematics,100,33
+Class 3,General,Science,100,33
+Class 3,General,Religion,100,33
+
+Class 4,General,Bangla,100,33
+Class 4,General,English,100,33
+Class 4,General,Mathematics,100,33
+Class 4,General,Science,100,33
+Class 4,General,Religion,100,33
+
+Class 5,General,Bangla,100,33
+Class 5,General,English,100,33
+Class 5,General,Mathematics,100,33
+Class 5,General,Science,100,33
+Class 5,General,Religion,100,33
+
+Class 6,General,Bangla,100,33
+Class 6,General,English,100,33
+Class 6,General,Mathematics,100,33
+Class 6,General,Science,100,33
+Class 6,General,Religion,100,33
+
+Class 7,General,Bangla,100,33
+Class 7,General,English,100,33
+Class 7,General,Mathematics,100,33
+Class 7,General,Science,100,33
+Class 7,General,Religion,100,33
+
+Class 8,General,Bangla,100,33
+Class 8,General,English,100,33
+Class 8,General,Mathematics,100,33
+Class 8,General,Science,100,33
+Class 8,General,Religion,100,33
+
+Class 9,Science,Bangla,100,33
+Class 9,Science,English,100,33
+Class 9,Science,Mathematics,100,33
+Class 9,Science,ICT,100,33
+Class 9,Science,Religion and Moral Education,100,33
+Class 9,Science,Physics,100,33
+Class 9,Science,Chemistry,100,33
+Class 9,Science,Biology,100,33
+Class 9,Science,Higher Mathematics,100,33
+Class 9,Science,Bangladesh and Global Studies,100,33
+
+Class 9,Humanities,Bangla,100,33
+Class 9,Humanities,English,100,33
+Class 9,Humanities,Mathematics,100,33
+Class 9,Humanities,ICT,100,33
+Class 9,Humanities,Religion and Moral Education,100,33
+Class 9,Humanities,History,100,33
+Class 9,Humanities,Geography,100,33
+Class 9,Humanities,Civics,100,33
+Class 9,Humanities,Economics,100,33
+Class 9,Humanities,General Science,100,33
+
+Class 9,Business Studies,Bangla,100,33
+Class 9,Business Studies,English,100,33
+Class 9,Business Studies,Mathematics,100,33
+Class 9,Business Studies,ICT,100,33
+Class 9,Business Studies,Religion and Moral Education,100,33
+Class 9,Business Studies,Accounting,100,33
+Class 9,Business Studies,Business Entrepreneurship,100,33
+Class 9,Business Studies,Finance and Banking,100,33
+Class 9,Business Studies,Economics,100,33
+Class 9,Business Studies,General Science,100,33
+
+Class 10,Science,Bangla,100,33
+Class 10,Science,English,100,33
+Class 10,Science,Mathematics,100,33
+Class 10,Science,ICT,100,33
+Class 10,Science,Religion and Moral Education,100,33
+Class 10,Science,Physics,100,33
+Class 10,Science,Chemistry,100,33
+Class 10,Science,Biology,100,33
+Class 10,Science,Higher Mathematics,100,33
+Class 10,Science,Bangladesh and Global Studies,100,33
+
+Class 10,Humanities,Bangla,100,33
+Class 10,Humanities,English,100,33
+Class 10,Humanities,Mathematics,100,33
+Class 10,Humanities,ICT,100,33
+Class 10,Humanities,Religion and Moral Education,100,33
+Class 10,Humanities,History,100,33
+Class 10,Humanities,Geography,100,33
+Class 10,Humanities,Civics,100,33
+Class 10,Humanities,Economics,100,33
+Class 10,Humanities,General Science,100,33
+
+Class 10,Business Studies,Bangla,100,33
+Class 10,Business Studies,English,100,33
+Class 10,Business Studies,Mathematics,100,33
+Class 10,Business Studies,ICT,100,33
+Class 10,Business Studies,Religion and Moral Education,100,33
+Class 10,Business Studies,Accounting,100,33
+Class 10,Business Studies,Business Entrepreneurship,100,33
+Class 10,Business Studies,Finance and Banking,100,33
+Class 10,Business Studies,Economics,100,33
+Class 10,Business Studies,General Science,100,33
+
+Class XI,Science,Bangla,100,33
+Class XI,Science,English,100,33
+Class XI,Science,ICT,100,33
+Class XI,Science,Physics,100,33
+Class XI,Science,Chemistry,100,33
+Class XI,Science,Biology,100,33
+Class XI,Science,Higher Mathematics,100,33
+Class XI,Science,Statistics,100,33
+
+Class XI,Humanities,Bangla,100,33
+Class XI,Humanities,English,100,33
+Class XI,Humanities,ICT,100,33
+Class XI,Humanities,Economics,100,33
+Class XI,Humanities,Civics and Good Governance,100,33
+Class XI,Humanities,History,100,33
+Class XI,Humanities,Islamic History and Culture,100,33
+Class XI,Humanities,Logic,100,33
+Class XI,Humanities,Sociology,100,33
+Class XI,Humanities,Psychology,100,33
+Class XI,Humanities,Geography,100,33
+
+Class XI,Business Studies,Bangla,100,33
+Class XI,Business Studies,English,100,33
+Class XI,Business Studies,ICT,100,33
+Class XI,Business Studies,Accounting,100,33
+Class XI,Business Studies,Business Organization and Management,100,33
+Class XI,Business Studies,Finance Banking and Insurance,100,33
+Class XI,Business Studies,Production Management and Marketing,100,33
+Class XI,Business Studies,Statistics,100,33
+Class XI,Business Studies,Economics,100,33
+
+Class XII,Science,Bangla,100,33
+Class XII,Science,English,100,33
+Class XII,Science,ICT,100,33
+Class XII,Science,Physics,100,33
+Class XII,Science,Chemistry,100,33
+Class XII,Science,Biology,100,33
+Class XII,Science,Higher Mathematics,100,33
+Class XII,Science,Statistics,100,33
+
+Class XII,Humanities,Bangla,100,33
+Class XII,Humanities,English,100,33
+Class XII,Humanities,ICT,100,33
+Class XII,Humanities,Economics,100,33
+Class XII,Humanities,Civics and Good Governance,100,33
+Class XII,Humanities,History,100,33
+Class XII,Humanities,Islamic History and Culture,100,33
+Class XII,Humanities,Logic,100,33
+Class XII,Humanities,Sociology,100,33
+Class XII,Humanities,Psychology,100,33
+Class XII,Humanities,Geography,100,33
+
+Class XII,Business Studies,Bangla,100,33
+Class XII,Business Studies,English,100,33
+Class XII,Business Studies,ICT,100,33
+Class XII,Business Studies,Accounting,100,33
+Class XII,Business Studies,Business Organization and Management,100,33
+Class XII,Business Studies,Finance Banking and Insurance,100,33
+Class XII,Business Studies,Production Management and Marketing,100,33
+Class XII,Business Studies,Statistics,100,33
+Class XII,Business Studies,Economics,100,33

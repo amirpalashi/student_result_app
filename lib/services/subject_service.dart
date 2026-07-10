@@ -76,4 +76,71 @@ class SubjectService {
 
     return result.isNotEmpty;
   }
+
+  Future<List<SubjectModel>> getAllSubjects() async {
+    final Database db = await DatabaseHelper.instance.database;
+
+    final result = await db.query(
+      DatabaseTables.subjectTable,
+      orderBy: 'class_name ASC, group_name ASC, subject_name ASC',
+    );
+
+    return result.map((e) => SubjectModel.fromMap(e)).toList();
+  }
+  //=========================================
+  // Bulk Insert Subjects
+  //=========================================
+
+  Future<void> insertSubjects(List<SubjectModel> subjects) async {
+    final Database db = await DatabaseHelper.instance.database;
+
+    final batch = db.batch();
+
+    for (final subject in subjects) {
+      batch.insert(
+        DatabaseTables.subjectTable,
+        subject.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    }
+
+    await batch.commit(noResult: true);
+  }
+  //=========================================
+  // Delete All Subjects
+  //=========================================
+
+  Future<void> deleteAllSubjects() async {
+    final Database db = await DatabaseHelper.instance.database;
+
+    await db.delete(DatabaseTables.subjectTable);
+  }
+  //=========================================
+  // Get Single Subject
+  //=========================================
+
+  Future<SubjectModel?> getSubject({
+    required String className,
+    required String groupName,
+    required String subjectName,
+  }) async {
+    final Database db = await DatabaseHelper.instance.database;
+
+    final result = await db.query(
+      DatabaseTables.subjectTable,
+      where: '''
+      class_name = ?
+      AND group_name = ?
+      AND LOWER(subject_name) = LOWER(?)
+    ''',
+      whereArgs: [className, groupName, subjectName.trim()],
+      limit: 1,
+    );
+
+    if (result.isEmpty) {
+      return null;
+    }
+
+    return SubjectModel.fromMap(result.first);
+  }
 }
