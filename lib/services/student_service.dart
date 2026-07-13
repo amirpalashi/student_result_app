@@ -75,6 +75,28 @@ AND exam = ?
     return result.map(StudentModel.fromMap).toList();
   }
 
+  Future<List<StudentModel>> getStudentsByClass({
+    required String className,
+    String? groupName,
+  }) async {
+    final Database db = await DatabaseHelper.instance.database;
+
+    final bool hasGroup =
+        className == 'Class 9' ||
+        className == 'Class 10' ||
+        className == 'Class XI' ||
+        className == 'Class XII';
+
+    final result = await db.query(
+      DatabaseTables.studentTable,
+      where: hasGroup ? 'class_name = ? AND group_name = ?' : 'class_name = ?',
+      whereArgs: hasGroup ? [className, groupName] : [className],
+      orderBy: 'CAST(roll AS INTEGER) ASC',
+    );
+
+    return result.map(StudentModel.fromMap).toList();
+  }
+
   Future<List<StudentModel>> getStudentsForResult({
     required String session,
     required String exam,

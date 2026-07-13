@@ -58,7 +58,6 @@ class _ResultEntryScreenState extends State<ResultEntryScreen> {
   }
 
   Future<void> loadStudents() async {
-
     if (session == null || exam == null || studentClass == null) {
       return;
     }
@@ -69,11 +68,9 @@ class _ResultEntryScreenState extends State<ResultEntryScreen> {
         studentClass == 'Class XI' ||
         studentClass == 'Class XII';
 
-
     if (hasGroup && group == null) {
       return;
     }
-
 
     final result = await StudentService.instance.getStudentsForResult(
       session: session!,
@@ -296,6 +293,24 @@ class _ResultEntryScreenState extends State<ResultEntryScreen> {
     return 'F';
   }
 
+  bool get _isPass {
+    for (final subject in _subjects) {
+      final controller = _controllers[subject.id!];
+
+      if (controller == null || controller.text.isEmpty) {
+        continue;
+      }
+
+      final marks = int.tryParse(controller.text);
+
+      if (marks != null && marks < subject.passMarks) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -450,7 +465,7 @@ class _ResultEntryScreenState extends State<ResultEntryScreen> {
                         : _totalMarks / _subjects.length,
                     gpa: _gpa,
                     grade: _finalGrade,
-                    isPass: _finalGrade != 'F',
+                    isPass: _isPass,
                   ),
 
                 const SizedBox(height: 30),

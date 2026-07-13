@@ -1,9 +1,5 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-
-import '../core/constants/app_strings.dart';
-import '../core/theme/app_text_styles.dart';
 import '../models/school_settings_model.dart';
 import '../services/school_settings_service.dart';
 
@@ -42,10 +38,7 @@ class _HomeHeaderState extends State<HomeHeader> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            colorScheme.primary,
-            colorScheme.primaryContainer,
-          ],
+          colors: [colorScheme.primary, colorScheme.primaryContainer],
         ),
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(36),
@@ -61,14 +54,11 @@ class _HomeHeaderState extends State<HomeHeader> {
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: SizedBox(
-                width: 82,
-                height: 82,
-                child: settings?.logoPath != null &&
-                        settings!.logoPath!.isNotEmpty
-                    ? Image.file(
-                        File(settings!.logoPath!),
-                        fit: BoxFit.contain,
-                      )
+                width: 90,
+                height: 90,
+                child:
+                    settings?.logoPath != null && settings!.logoPath!.isNotEmpty
+                    ? Image.file(File(settings!.logoPath!), fit: BoxFit.contain)
                     : Image.asset(
                         "assets/images/college_logo.png",
                         fit: BoxFit.contain,
@@ -79,26 +69,26 @@ class _HomeHeaderState extends State<HomeHeader> {
 
           const SizedBox(height: 20),
 
-          Text(
-            settings?.organizationName.isNotEmpty == true
-                ? settings!.organizationName
-                : AppStrings.collegeName,
-            textAlign: TextAlign.center,
-            style: AppTextStyles.title.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-
-          const SizedBox(height: 8),
-
           const Text(
             "Student Result Management System",
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+          const SizedBox(height: 8),
+          Text(
+            settings?.organizationName.isNotEmpty == true
+                ? settings!.organizationName
+                : "Your Institution Name",
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
           ),
 
@@ -107,46 +97,11 @@ class _HomeHeaderState extends State<HomeHeader> {
             Text(
               settings!.address,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.white70,
-                fontSize: 13,
-              ),
+              style: const TextStyle(color: Colors.white70, fontSize: 13),
             ),
           ],
 
           const SizedBox(height: 18),
-
-          Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 14,
-              vertical: 8,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.18),
-              borderRadius: BorderRadius.circular(50),
-              border: Border.all(
-                color: Colors.white24,
-              ),
-            ),
-            child: const Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.school_outlined,
-                  size: 18,
-                  color: Colors.white,
-                ),
-                SizedBox(width: 8),
-                Text(
-                  "Academic Result Portal",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ),
         ],
       ),
     );

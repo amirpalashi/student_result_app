@@ -72,7 +72,7 @@ class _SubjectResultListState extends State<SubjectResultList> {
             child: Column(
               children: [
                 const Text(
-                  'Subject Results (TEST)',
+                  'Subject Results',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
 

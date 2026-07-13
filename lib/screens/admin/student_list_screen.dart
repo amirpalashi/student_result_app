@@ -4,6 +4,8 @@ import '../../models/student_model.dart';
 import '../../repositories/student_repository.dart';
 import '../../widgets/admin/student_card.dart';
 import 'add_student_screen.dart';
+import '../../widgets/app_selector.dart';
+import '../../core/utils/education_helper.dart';
 
 class StudentListScreen extends StatefulWidget {
   const StudentListScreen({super.key});
@@ -14,6 +16,26 @@ class StudentListScreen extends StatefulWidget {
 
 class _StudentListScreenState extends State<StudentListScreen> {
   List<StudentModel> students = [];
+  String? selectedClass;
+  String? selectedGroup;
+
+  final List<String> classList = const [
+    'Play',
+    'Nursery',
+    'KG',
+    'Class 1',
+    'Class 2',
+    'Class 3',
+    'Class 4',
+    'Class 5',
+    'Class 6',
+    'Class 7',
+    'Class 8',
+    'Class 9',
+    'Class 10',
+    'Class XI',
+    'Class XII',
+  ];
 
   bool isLoading = true;
   Future<void> loadStudents() async {
@@ -24,6 +46,29 @@ class _StudentListScreenState extends State<StudentListScreen> {
     setState(() {
       students = data;
       isLoading = false;
+    });
+  }
+
+  Future<void> loadStudentsByClass() async {
+    if (selectedClass == null) return;
+
+    // Class 9-12 হলে Group নির্বাচন না করা পর্যন্ত Load হবে না
+    if (EducationHelper.hasGroup(selectedClass) && selectedGroup == null) {
+      setState(() {
+        students = [];
+      });
+      return;
+    }
+
+    final data = await StudentRepository.instance.getStudentsByClass(
+      className: selectedClass!,
+      groupName: selectedGroup,
+    );
+
+    if (!mounted) return;
+
+    setState(() {
+      students = data;
     });
   }
 
@@ -94,7 +139,6 @@ class _StudentListScreenState extends State<StudentListScreen> {
   @override
   void initState() {
     super.initState();
-    loadStudents();
   }
 
   @override
@@ -102,28 +146,110 @@ class _StudentListScreenState extends State<StudentListScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text("Student List"), centerTitle: true),
 
-      body: ListView.builder(
-        itemCount: students.length,
-        itemBuilder: (context, index) {
-          final student = students[index];
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: AppSelector<String>(
+              label: "Class",
+              icon: Icons.school,
+              value: selectedClass,
+              items: classList,
+              itemLabel: (item) => item,
+              onChanged: (value) {
+                setState(() {
+                  selectedClass = value;
+                });
 
-          return StudentCard(
-            student: student,
-            onEdit: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => AddStudentScreen(student: student),
+                loadStudentsByClass();
+              },
+            ),
+          ),
+          if (EducationHelper.hasGroup(selectedClass))
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: AppSelector<String>(
+                label: "Group",
+                icon: Icons.groups,
+                value: selectedGroup,
+                items: EducationHelper.availableGroups(selectedClass),
+                itemLabel: (item) => item,
+                onChanged: (value) {
+                  setState(() {
+                    selectedGroup = value;
+                  });
+
+                  loadStudentsByClass();
+                },
+              ),
+            ),
+          if (selectedClass != null)
+            Card(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        EducationHelper.hasGroup(selectedClass)
+                            ? '$selectedClass (${selectedGroup ?? "Select Group"})'
+                            : selectedClass!,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      'Total: ${students.length}',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
-              );
+              ),
+            ),
+        
 
-              loadStudents();
-            },
-            onDelete: () {
-              _deleteStudent(student);
-            },
-          );
-        },
+          Expanded(
+            child: students.isEmpty
+                ? const Center(
+                    child: Text(
+                      "Please select a class",
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: students.length,
+                    itemBuilder: (context, index) {
+                      final student = students[index];
+
+                      return StudentCard(
+                        student: student,
+                        onEdit: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  AddStudentScreen(student: student),
+                            ),
+                          );
+
+                          if (selectedClass == null) {
+                            loadStudents();
+                          } else {
+                            loadStudentsByClass();
+                          }
+                        },
+                        onDelete: () {
+                          _deleteStudent(student);
+                        },
+                      );
+                    },
+                  ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -131,22 +257,12 @@ class _StudentListScreenState extends State<StudentListScreen> {
             context,
             MaterialPageRoute(builder: (_) => const AddStudentScreen()),
           );
-          Future<void> loadStudents() async {
-            final data = await StudentRepository.instance.getAllStudents();
 
-            debugPrint("===== TOTAL STUDENTS =====");
-            debugPrint(data.length.toString());
-
-            if (!mounted) return;
-
-            setState(() {
-              students = data;
-              isLoading = false;
-            });
+          if (selectedClass == null) {
+            loadStudents();
+          } else {
+            loadStudentsByClass();
           }
-
-          // Add Student Screen থেকে ফিরে এলে List Refresh হবে
-          loadStudents();
         },
         child: const Icon(Icons.add),
       ),

@@ -5,9 +5,11 @@ import '../../services/subject_result_service.dart';
 
 import 'widgets/result_header.dart';
 import 'widgets/student_info_card.dart';
-import 'widgets/subject_result_list.dart';
 import '../../widgets/result/result_summary_card.dart';
 import 'widgets/result_action_buttons.dart';
+import '../../models/result_summary_model.dart';
+import '../../widgets/result/result_subjects_card.dart';
+import '../../models/subject_result_model.dart';
 
 class ResultViewScreen extends StatefulWidget {
   final StudentModel student;
@@ -19,6 +21,9 @@ class ResultViewScreen extends StatefulWidget {
 }
 
 class _ResultViewScreenState extends State<ResultViewScreen> {
+  List<SubjectResultModel> _results = [];
+  ResultSummaryModel? _summary;
+
   bool _isLoading = true;
 
   int _totalMarks = 0;
@@ -39,6 +44,10 @@ class _ResultViewScreenState extends State<ResultViewScreen> {
   }
 
   Future<void> _loadResultSummary() async {
+    final results = await SubjectResultService.instance.getSubjectResults(
+      widget.student.studentId,
+    );
+
     final summary = await SubjectResultService.instance.getResultSummary(
       widget.student.studentId,
     );
@@ -46,12 +55,16 @@ class _ResultViewScreenState extends State<ResultViewScreen> {
     if (!mounted) return;
 
     setState(() {
+      _results = results;
+      _summary = summary;
+
       _totalSubjects = summary.totalSubjects;
       _totalMarks = summary.totalMarks;
       _averageMarks = summary.averageMarks;
       _gpa = summary.gpa;
       _grade = summary.grade;
       _isPass = summary.isPass;
+
       _isLoading = false;
     });
   }
@@ -74,7 +87,7 @@ class _ResultViewScreenState extends State<ResultViewScreen> {
 
                   const SizedBox(height: 20),
 
-                  SubjectResultList(studentId: widget.student.studentId),
+                  ResultSubjectsCard(results: _results),
 
                   const SizedBox(height: 20),
 
@@ -89,9 +102,13 @@ class _ResultViewScreenState extends State<ResultViewScreen> {
 
                   const SizedBox(height: 20),
 
-                  const ResultActionButtons(),
-
-                  const SizedBox(height: 30),
+                
+                  if (_summary != null)
+                    ResultActionButtons(
+                      student: widget.student,
+                      results: _results,
+                      summary: _summary!,
+                    ),
                 ],
               ),
             ),

@@ -144,7 +144,7 @@ class AdminDashboardScreen extends StatelessWidget {
             Icon(icon, size: 50, color: color),
             const SizedBox(height: 12),
             Text(
-              title,
+              title,textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ],

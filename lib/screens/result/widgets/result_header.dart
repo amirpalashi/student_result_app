@@ -1,46 +1,77 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 
-class ResultHeader extends StatelessWidget {
+import '../../../models/school_settings_model.dart';
+import '../../../services/school_settings_service.dart';
+
+class ResultHeader extends StatefulWidget {
   const ResultHeader({super.key});
+
+  @override
+  State<ResultHeader> createState() => _ResultHeaderState();
+}
+
+class _ResultHeaderState extends State<ResultHeader> {
+  SchoolSettingsModel? _settings;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSettings();
+  }
+
+  Future<void> _loadSettings() async {
+    final settings = await SchoolSettingsService.instance.getSettings();
+
+    if (!mounted) return;
+
+    setState(() {
+      _settings = settings;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            const CircleAvatar(
+            CircleAvatar(
               radius: 35,
-              child: Icon(
-                Icons.school,
-                size: 38,
-              ),
+              backgroundImage:
+                  (_settings?.logoPath != null &&
+                      _settings!.logoPath!.isNotEmpty)
+                  ? FileImage(File(_settings!.logoPath!))
+                  : null,
+              child:
+                  (_settings?.logoPath == null || _settings!.logoPath!.isEmpty)
+                  ? const Icon(Icons.school, size: 38)
+                  : null,
             ),
 
             const SizedBox(height: 16),
 
-            const Text(
-              'PALASH RESIDENTIAL MODEL COLLEGE',
+            Text(
+              (_settings?.organizationName.isNotEmpty ?? false)
+                  ? _settings!.organizationName
+                  : 'ORGANIZATION NAME',
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 0.5,
               ),
             ),
-
             const SizedBox(height: 6),
 
             Text(
-              'Palash, Narsingdi',
-              style: TextStyle(
-                color: Colors.grey.shade700,
-              ),
+              (_settings?.address.isNotEmpty ?? false)
+                  ? _settings!.address
+                  : 'Palash, Narsingdi',
+              style: TextStyle(color: Colors.grey.shade700),
             ),
 
             const SizedBox(height: 4),

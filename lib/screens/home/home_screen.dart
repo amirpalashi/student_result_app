@@ -145,10 +145,27 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     },
-                    icon: const Icon(Icons.admin_panel_settings),
-                    label: const Text("Admin Panel"),
+                    icon: const Icon(
+                      Icons.lock_outline,
+                      color: Colors.white,
+                      size: 22,
+                    ),
+                    label: const Text(
+                      "🔒 Admin Dashboard",
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                     style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 50),
+                      backgroundColor: Colors.indigo,
+                      foregroundColor: Colors.white,
+                      elevation: 6,
+                      minimumSize: const Size(double.infinity, 56),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                     ),
                   ),
                 ),
@@ -158,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const Padding(
                 padding: EdgeInsets.only(bottom: 20),
                 child: Text(
-                  "© 2026 Student Result App",
+                  "© 2026 Student Result Management System",
                   style: TextStyle(color: Colors.grey, fontSize: 13),
                 ),
               ),

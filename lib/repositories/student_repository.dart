@@ -32,6 +32,17 @@ class StudentRepository {
     return StudentService.instance.getAllStudents();
   }
 
+  // Get Students By Class
+  Future<List<StudentModel>> getStudentsByClass({
+    required String className,
+    String? groupName,
+  }) {
+    return StudentService.instance.getStudentsByClass(
+      className: className,
+      groupName: groupName,
+    );
+  }
+
   // Insert Student
   Future<int> insertStudent(StudentModel student) {
     return StudentService.instance.insertStudent(student);

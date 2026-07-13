@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../services/pdf/marksheet_pdf_service.dart';
 
 import '../../models/student_model.dart';
 import '../../services/student_service.dart';
 import '../../widgets/app_selector.dart';
 import '../../core/constants/app_lists.dart';
-import '../../widgets/result/student_info_card.dart';
-import '../../models/subject_result_model.dart';
-import '../../services/subject_result_service.dart';
 import '../../widgets/result/school_header.dart';
-import '../../widgets/result/result_subjects_card.dart';
-import '../../models/result_summary_model.dart';
-import '../../widgets/result/result_summary_card.dart';
+import '../result/result_view_screen.dart';
 
 class StudentMarksheetScreen extends StatefulWidget {
   const StudentMarksheetScreen({super.key});
@@ -28,53 +22,10 @@ class _StudentMarksheetScreenState extends State<StudentMarksheetScreen> {
 
   List<StudentModel> students = [];
   StudentModel? selectedStudent;
-  List<SubjectResultModel> subjectResults = [];
-  ResultSummaryModel? summary;
+  
 
-  Future<void> loadResults() async {
-    if (selectedStudent == null) {
-      return;
-    }
 
-    final results = await SubjectResultService.instance.getSubjectResults(
-      selectedStudent!.studentId,
-    );
 
-    final resultSummary = await SubjectResultService.instance.getResultSummary(
-      selectedStudent!.studentId,
-    );
-
-    if (!mounted) return;
-
-    setState(() {
-      subjectResults = results;
-      summary = resultSummary;
-    });
-  }
-
-  Future<void> _shareMarksheet() async {
-    if (selectedStudent == null || summary == null) {
-      return;
-    }
-
-    await MarksheetPdfService.share(
-      student: selectedStudent!,
-      results: subjectResults,
-      summary: summary!,
-    );
-  }
-
-  Future<void> _printMarksheet() async {
-    if (selectedStudent == null || summary == null) {
-      return;
-    }
-
-    await MarksheetPdfService.print(
-      student: selectedStudent!,
-      results: subjectResults,
-      summary: summary!,
-    );
-  }
 
   Future<void> loadStudents() async {
     if (session == null || exam == null || studentClass == null) {
@@ -105,8 +56,6 @@ class _StudentMarksheetScreenState extends State<StudentMarksheetScreen> {
       selectedStudent = null;
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -208,55 +157,19 @@ class _StudentMarksheetScreenState extends State<StudentMarksheetScreen> {
             items: students,
             itemLabel: (student) =>
                 '${student.roll} - ${student.studentName} (${student.studentId})',
-            onChanged: (student) async {
-              setState(() {
-                selectedStudent = student;
-              });
+            onChanged: (student) {
 
-              await loadResults();
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ResultViewScreen(student: student),
+                ),
+              );
             },
           ),
 
           const SizedBox(height: 20),
-
-          if (selectedStudent != null)
-            StudentInfoCard(student: selectedStudent!),
-
-          if (subjectResults.isNotEmpty) ...[
-            const SizedBox(height: 20),
-            ResultSubjectsCard(results: subjectResults),
-          ],
-
-          if (summary != null) ...[
-            const SizedBox(height: 20),
-            ResultSummaryCard(
-              totalSubjects: summary!.totalSubjects,
-              totalMarks: summary!.totalMarks,
-              averageMarks: summary!.averageMarks,
-              gpa: summary!.gpa,
-              grade: summary!.grade,
-              isPass: summary!.isPass,
-            ),
-          ],
-          const SizedBox(height: 20),
-
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton.icon(
-                  onPressed: _printMarksheet,
-                  icon: const Icon(Icons.print),
-                  label: const Text('Print'),
-                ),
-              ),
-              ElevatedButton.icon(
-                onPressed: _shareMarksheet,
-                icon: const Icon(Icons.share),
-                label: const Text('Share PDF'),
-              ),
-              
-            ],
-          ),
         ],
       ),
     );
