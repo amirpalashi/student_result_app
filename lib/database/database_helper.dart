@@ -1,11 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../services/student_service.dart';
 import 'database_tables.dart';
-import 'seed_data.dart';
-import '../database/subject_seed_data.dart';
-import '../services/subject_result_service.dart';
 
 class DatabaseHelper {
   DatabaseHelper._();
@@ -20,8 +16,6 @@ class DatabaseHelper {
     }
 
     _database = await _initDatabase();
-
-    await _seedDatabase();
 
     return _database!;
   }
@@ -76,25 +70,5 @@ class DatabaseHelper {
     await db.delete(DatabaseTables.studentTable);
   }
 
-  Future<void> _seedDatabase() async {
-    // Students
-    final students = await StudentService.instance.getAllStudents();
-
-    if (students.isEmpty) {
-      for (final student in SeedData.students) {
-        await StudentService.instance.insertStudent(student);
-      }
-    }
-
-    // Subjects
-    final subjects = await SubjectResultService.instance.getSubjectResults(
-      '1001',
-    );
-
-    if (subjects.isEmpty) {
-      for (final subject in SubjectSeedData.subjects) {
-        await SubjectResultService.instance.insertSubjectResult(subject);
-      }
-    }
-  }
+  
 }

@@ -22,8 +22,6 @@ class _ResultExportScreenState extends State<ResultExportScreen> {
     try {
       final results = await SubjectResultService.instance.getAllResults();
 
-      debugPrint('Total Results: ${results.length}');
-
       final file = await ExcelService.instance.exportResults(results);
 
       await SharePlus.instance.share(
