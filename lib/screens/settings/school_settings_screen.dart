@@ -145,35 +145,8 @@ class _SchoolSettingsScreenState extends State<SchoolSettingsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Card(
-                child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'School Settings',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'These settings will be used in Home Screen, Marksheet, PDF, Print and Share.',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
 
-              const Text(
-                'School Logo',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-
-              const SizedBox(height: 12),
 
               Center(
                 child: Column(
@@ -199,7 +172,7 @@ class _SchoolSettingsScreenState extends State<SchoolSettingsScreen> {
                 ),
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 35),
 
               const Text(
                 'Organization Information',

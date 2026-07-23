@@ -35,29 +35,36 @@ class MarksheetPdfService {
     }
 
     pdf.addPage(
-      pw.Page(
+      pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
         margin: const pw.EdgeInsets.all(20),
-        build: (context) {
-          return pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
-            children: [
-              _buildHeader(settings, logo),
-              pw.SizedBox(height: 20),
-              _buildStudentInfo(student),
-              pw.SizedBox(height: 20),
-              _buildResultBanner(summary),
-              pw.SizedBox(height: 20),
-              _buildSubjectTable(results),
-              pw.SizedBox(height: 20),
-              _buildSummary(summary),
-              pw.Spacer(),
-              _buildSignature(settings),
-              pw.SizedBox(height: 20),
-              _buildFooter(),
-            ],
-          );
-        },
+        build: (context) => [
+          _buildHeader(settings, logo),
+
+          pw.SizedBox(height: 20),
+
+          _buildStudentInfo(student),
+
+          pw.SizedBox(height: 20),
+
+          _buildResultBanner(summary),
+
+          pw.SizedBox(height: 20),
+
+          _buildSubjectTable(results),
+
+          pw.SizedBox(height: 20),
+
+          _buildSummary(summary),
+
+          pw.SizedBox(height: 30),
+
+          _buildSignature(settings),
+
+          pw.SizedBox(height: 20),
+
+          _buildFooter(),
+        ],
       ),
     );
 
@@ -530,7 +537,7 @@ class MarksheetPdfService {
             ),
 
             pw.Text(
-              "Student Result App",
+              "Student Result Management",
               style: pw.TextStyle(fontSize: 9, fontWeight: pw.FontWeight.bold),
             ),
           ],

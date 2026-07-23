@@ -6,6 +6,7 @@ import '../result/result_entry_screen.dart';
 import 'import_export/import_export_screen.dart';
 import '../result/student_marksheet_screen.dart';
 import '../settings/school_settings_screen.dart';
+import '../about/about_screen.dart';
 
 class AdminDashboardScreen extends StatelessWidget {
   const AdminDashboardScreen({super.key});
@@ -117,7 +118,10 @@ class AdminDashboardScreen extends StatelessWidget {
               title: "About",
               color: Colors.grey,
               onTap: () {
-                // পরে করব
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const AboutScreen()),
+                );
               },
             ),
           ],
@@ -144,7 +148,8 @@ class AdminDashboardScreen extends StatelessWidget {
             Icon(icon, size: 50, color: color),
             const SizedBox(height: 12),
             Text(
-              title,textAlign: TextAlign.center,
+              title,
+              textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ],

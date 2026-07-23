@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _searchStudent() async {
+    FocusScope.of(context).unfocus();
     if (!_formKey.currentState!.validate()) {
       return;
     }
@@ -175,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const Padding(
                 padding: EdgeInsets.only(bottom: 20),
                 child: Text(
-                  "© 2026 Student Result Management System",
+                  "© 2026 Student Result Management",
                   style: TextStyle(color: Colors.grey, fontSize: 13),
                 ),
               ),

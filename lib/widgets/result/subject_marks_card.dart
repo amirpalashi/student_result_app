@@ -54,6 +54,9 @@ class SubjectMarksCard extends StatelessWidget {
                   textInputAction: TextInputAction.next,
                   textAlign: TextAlign.center,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  onTapOutside: (_) {
+                    FocusScope.of(context).unfocus();
+                  },
                   decoration: InputDecoration(
                     hintText: "0",
                     isDense: true,

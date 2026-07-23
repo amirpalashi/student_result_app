@@ -70,7 +70,7 @@ class _HomeHeaderState extends State<HomeHeader> {
           const SizedBox(height: 20),
 
           const Text(
-            "Student Result Management System",
+            "Student Result Management",
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,

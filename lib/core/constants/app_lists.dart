@@ -1,7 +1,7 @@
 class AppLists {
   AppLists._();
 
-  static const String collegeName = "Palash Residential Model College";
+  static const String collegeName = "Organization Name";
 
   static const List<String> academicSessions = [
     '2026-27',

@@ -79,11 +79,6 @@ class ResultSearchForm extends StatelessWidget {
                       ),
 
                       const SizedBox(height: 6),
-
-                      Text(
-                        "Select session, class, exam and enter the student ID to search the result.",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
                     ],
                   ),
                 ),
@@ -102,7 +97,7 @@ class ResultSearchForm extends StatelessWidget {
           const SizedBox(height: 30),
 
           AppSelector<String>(
-            label: "Academic Session",
+            label: "Session",
             icon: Icons.calendar_today,
             value: session,
             items: AppLists.academicSessions,
@@ -110,7 +105,7 @@ class ResultSearchForm extends StatelessWidget {
             onChanged: onSessionChanged,
             validator: (value) {
               if (value == null) {
-                return "Please select academic session";
+                return "Please select session";
               }
               return null;
             },
@@ -156,6 +151,7 @@ class ResultSearchForm extends StatelessWidget {
             label: "Student ID",
             controller: studentIdController,
             keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.done,
             prefixIcon: Icons.badge,
             validator: (value) {
               if (value == null || value.trim().isEmpty) {

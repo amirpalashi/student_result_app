@@ -27,6 +27,15 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
+
+      onEditingComplete: () {
+        FocusScope.of(context).unfocus();
+      },
+
+      onTapOutside: (_) {
+        FocusScope.of(context).unfocus();
+      },
+
       validator: validator,
       inputFormatters: inputFormatters,
       autofillHints: keyboardType == TextInputType.phone
